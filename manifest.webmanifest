@@ -1,0 +1,12 @@
+{
+  "name": "Magic Rain",
+  "short_name": "Magic Rain",
+  "id": "com.abadi.magicrain",
+  "description": "",
+  "orientation": "any",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "black",
+  "categories": ["games", "entertainment"],
+  "icons": []
+}
