@@ -17,10 +17,12 @@ workflows:
         script: node_modules/.bin/cap sync ios
       - name: Xcode build
         script: |
-          xcodebuild -workspace ios/App/App.xcworkspace \
+          cd ios/App
+          pod install
+          xcodebuild -workspace App.xcworkspace \
             -scheme App \
             -configuration Release \
-            -archivePath build/App.xcarchive \
+            -archivePath ../../build/App.xcarchive \
             archive
       - name: Export IPA
         script: |
