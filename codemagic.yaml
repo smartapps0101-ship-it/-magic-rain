@@ -12,7 +12,7 @@ workflows:
       - name: Install dependencies
         script: npm install
       - name: Build iOS
-        script: ./node_modules/.bin/cap sync ios
+        script: npm install && npx cap sync ios
       - name: Xcode build
         script: |
           xcodebuild -workspace ios/App/App.xcworkspace \
