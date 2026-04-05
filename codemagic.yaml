@@ -1,0 +1,32 @@
+workflows:
+  ios-workflow:
+    name: Magic Rain iOS
+    max_build_duration: 120
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.smartapps.magicrain
+    scripts:
+      - name: Build web
+        script: |
+          echo "GDevelop HTML5 game - no build needed"
+      - name: Create iOS app structure
+        script: |
+          mkdir -p ios/App/App
+          cat > ios/App/App/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <script src="index.js"></script>
+          </head>
+          <body style="margin:0;padding:0;">
+          </body>
+          </html>
+          EOF
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true 
