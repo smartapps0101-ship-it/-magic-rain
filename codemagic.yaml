@@ -10,9 +10,11 @@ workflows:
         bundle_identifier: com.smartapps.magicrain
     scripts:
       - name: Install dependencies
-        script: npm install
+        script: |
+          npm install
+          npm install @capacitor/cli @capacitor/core @capacitor/ios
       - name: Build iOS
-        script: npm install && npx cap sync ios
+        script: node_modules/.bin/cap sync ios
       - name: Xcode build
         script: |
           xcodebuild -workspace ios/App/App.xcworkspace \
