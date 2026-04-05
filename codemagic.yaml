@@ -15,5 +15,4 @@ workflows:
       - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:
-        use_apple_id: false
         submit_to_testflight: true
