@@ -15,26 +15,16 @@ workflows:
         script: |
           npm install
           npm install @capacitor/cli @capacitor/core @capacitor/ios
-      - - name: Xcode build
+      - name: Build iOS
+        script: node_modules/.bin/cap sync ios
+      - name: Xcode build
         script: |
           cd ios/App
           pod install
-          xcodebuild -workspace App.xcworkspace \
-            -scheme App \
-            -configuration Release \
-            -archivePath ../../build/App.xcarchive \
-            -allowProvisioningUpdates \
-            CODE_SIGN_STYLE=Manual \
-            PROVISIONING_PROFILE_SPECIFIER=MagicRain \
-            CODE_SIGN_IDENTITY="iPhone Distribution" \
-            DEVELOPMENT_TEAM=69H94FNMZF \
-            archive
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE_SPECIFIER=MagicRain CODE_SIGN_IDENTITY="iPhone Distribution" DEVELOPMENT_TEAM=69H94FNMZF archive
       - name: Export IPA
         script: |
-          xcodebuild -exportArchive \
-            -archivePath build/App.xcarchive \
-            -exportPath build/ios/ipa \
-            -exportOptionsPlist ios/App/ExportOptions.plist
+          xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
