@@ -8,7 +8,8 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.smartapps.magicrain
-        certificate_private_key: Encrypted(...)
+        certificate: MagicRain
+        provisioning_profile: MagicRain
     scripts:
       - name: Build
         script: echo "GDevelop HTML5 game"
