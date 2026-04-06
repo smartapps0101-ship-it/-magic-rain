@@ -19,19 +19,22 @@ workflows:
         script: |
           cd ios/App
           pod install
-          python3 -c "
-          import re, sys
-          with open('App.xcodeproj/project.pbxproj', 'r') as f:
-              content = f.read()
-          content = re.sub(r'CODE_SIGN_STYLE = Automatic;', 'CODE_SIGN_STYLE = Automatic;\n\t\t\t\tDEVELOPMENT_TEAM = 69H94FNMZF;', content)
-          with open('App.xcodeproj/project.pbxproj', 'w') as f:
-              f.write(content)
-          print('Done')
-          "
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates archive
+          xcodebuild -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath ../../build/App.xcarchive \
+            -allowProvisioningUpdates \
+            -authenticationKeyIssuerID 47a4bfd1-7959-4bec-a3d1-09b78eb6abe7 \
+            -authenticationKeyID B6RHC26A8M \
+            -authenticationKeyPath $CM_CERTIFICATE \
+            DEVELOPMENT_TEAM=69H94FNMZF \
+            archive
       - name: Export IPA
         script: |
-          xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
+          xcodebuild -exportArchive \
+            -archivePath build/App.xcarchive \
+            -exportPath build/ios/ipa \
+            -exportOptionsPlist ios/App/ExportOptions.plist
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
