@@ -19,6 +19,8 @@ workflows:
         script: |
           cd ios/App
           pod install
+          sed -i '' 's/DEVELOPMENT_TEAM = ""/DEVELOPMENT_TEAM = 69H94FNMZF/g' App.xcodeproj/project.pbxproj
+          sed -i '' 's/DEVELOPMENT_TEAM = /DEVELOPMENT_TEAM = 69H94FNMZF/g' App.xcodeproj/project.pbxproj
           xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates archive
       - name: Export IPA
         script: |
