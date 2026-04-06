@@ -19,7 +19,16 @@ workflows:
         script: |
           cd ios/App
           pod install
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=69H94FNMZF CODE_SIGN_STYLE=Automatic archive
+          python3 -c "
+          import re, sys
+          with open('App.xcodeproj/project.pbxproj', 'r') as f:
+              content = f.read()
+          content = re.sub(r'CODE_SIGN_STYLE = Automatic;', 'CODE_SIGN_STYLE = Automatic;\n\t\t\t\tDEVELOPMENT_TEAM = 69H94FNMZF;', content)
+          with open('App.xcodeproj/project.pbxproj', 'w') as f:
+              f.write(content)
+          print('Done')
+          "
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates archive
       - name: Export IPA
         script: |
           xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
