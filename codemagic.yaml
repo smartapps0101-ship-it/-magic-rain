@@ -15,13 +15,12 @@ workflows:
           npm install @capacitor/cli @capacitor/core @capacitor/ios
       - name: Build iOS
         script: node_modules/.bin/cap sync ios
-      - name: Xcode build
+- name: Xcode build
         script: |
           cd ios/App
           pod install
-          sed -i '' 's/DEVELOPMENT_TEAM = ""/DEVELOPMENT_TEAM = 69H94FNMZF/g' App.xcodeproj/project.pbxproj
-          sed -i '' 's/DEVELOPMENT_TEAM = /DEVELOPMENT_TEAM = 69H94FNMZF/g' App.xcodeproj/project.pbxproj
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates archive
+          /usr/libexec/PlistBuddy -c "Set :objects:83CBB9F71A601CBA00E9B192:buildSettings:DEVELOPMENT_TEAM 69H94FNMZF" App.xcodeproj/project.pbxproj || true
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=69H94FNMZF CODE_SIGN_STYLE=Automatic archive
       - name: Export IPA
         script: |
           xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
