@@ -19,7 +19,7 @@ workflows:
         script: |
           cd ios/App
           pod install
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=69H94FNMZF CODE_SIGN_STYLE=Automatic archive
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=69H94FNMZF CODE_SIGN_STYLE=Manual PROVISIONING_PROFILE=628W629KP6 archive
       - name: Export IPA
         script: |
           xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
