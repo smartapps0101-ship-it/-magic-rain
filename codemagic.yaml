@@ -8,6 +8,9 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.smartapps.magicrain
+      vars:
+        APP_STORE_CONNECT_KEY_IDENTIFIER: B6RHC26A8M
+        APP_STORE_CONNECT_ISSUER_ID: 47a4bfd1-7959-4bec-a3d1-09b78eb6abe7
     scripts:
       - name: Install dependencies
         script: |
