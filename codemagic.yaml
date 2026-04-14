@@ -15,16 +15,11 @@ workflows:
           npm install @capacitor/cli @capacitor/core @capacitor/ios
       - name: Build iOS
         script: node_modules/.bin/cap sync ios
-      - name: Set up provisioning profile
-        script: |
-          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          cp ios/App/Codemagic.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/"
-          echo "Profile installed"
       - name: Xcode build
         script: |
           cd ios/App
           pod install
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates DEVELOPMENT_TEAM=69H94FNMZF archive
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive -allowProvisioningUpdates -allowProvisioningDeviceRegistration DEVELOPMENT_TEAM=69H94FNMZF CODE_SIGN_STYLE=Automatic archive
       - name: Export IPA
         script: |
           xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/ios/ipa -exportOptionsPlist ios/App/ExportOptions.plist
