@@ -2,13 +2,9 @@ workflows:
   ios-workflow:
     name: Magic Rain iOS
     max_build_duration: 120
-    integrations:
-      app_store_connect: Codemagic
     environment:
       groups:
         - deploy
-      vars:
-        APP_STORE_CONNECT_PRIVATE_KEY: $APP_STORE_CONNECT_PRIVATE_KEY
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.smartapps.magicrain
