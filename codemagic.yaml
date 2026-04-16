@@ -22,6 +22,7 @@ workflows:
       - name: Xcode build
         script: |
           cd ios/App
+          printf "install! 'cocoapods', :disable_input_output_paths => true" >> Podfile
           pod install
           xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath ../../build/App.xcarchive archive
       - name: Export IPA
