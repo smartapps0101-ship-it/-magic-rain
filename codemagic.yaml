@@ -7,6 +7,8 @@ workflows:
     environment:
       groups:
         - deploy
+      vars:
+        APP_STORE_CONNECT_PUBLISHER_PRIVATE_KEY: $APP_STORE_CONNECT_PRIVATE_KEY
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.smartapps.magicrain
