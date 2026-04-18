@@ -16,7 +16,9 @@ workflows:
           npm install
           npm install @capacitor/cli @capacitor/core @capacitor/ios
       - name: Build iOS
-        script: node_modules/.bin/cap sync ios
+        script: |
+          npx cap copy ios
+          npx cap sync ios
       - name: Set Xcode project signing
         script: |
           cd ios/App
