@@ -1,0 +1,14 @@
+{
+  "name": "magic_32rain",
+  "displayName": "Magic Rain",
+  "version": "1.0.5",
+  "description": "Magic Rain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": ""
+}
